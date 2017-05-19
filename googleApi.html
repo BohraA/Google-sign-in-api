@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>AngularJS Google Plus Sign-in Button Directive</title>
+    <meta name="description" content="A directive for AngularJS to provide a Google Plus Sigin-in Button">
+    <link href="//netdna.bootstrapcdn.com/bootswatch/2.3.0/cerulean/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        #googlebutton{
+            width: 120px;
+            height: 36px;
+            color: #FFFFFF;
+            border-bottom: solid 2px #02336d;
+            background: #225FCD;
+
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+        }
+
+        #googlebutton:hover,
+        #googlebutton:focus{
+            border-bottom: solid 2px #04538d;
+            background: #427FED;
+            cursor: pointer;
+        }
+
+        #googlebutton .google-icon{
+            margin: 6px 0 0 6px;
+            float: left;
+            fill: #FFFFFF;
+        }
+
+        #googlebutton .sign-in-text{
+            text-align: center;
+            vertical-align: middle;
+            margin: 3px 0 0 0;
+            float: left;
+            width: 90px;
+        }
+
+    </style>
+</head>
+<body class="container">
+
+
+
+<div class="row">
+    <div class="span6" ng-app="ExampleSigninApp">
+        <div ng-controller="ExampleCtrl">
+            <google-plus-signin clientid="996733112564-1hprhphoph422v4lfrsfd2k1juq58d7g"></google-plus-signin>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script src="js/googleApi.js"></script>
+
+<script>
+    angular.module('ExampleSigninApp', ['directive.g+signin'])
+        .controller('ExampleCtrl', function ($scope) {
+            debugger;
+            $scope.$on('event:google-plus-signin-success', function (event, authResult) {
+                // User successfully authorized the G+ App!
+                console.log('Signed in!');
+            });
+            $scope.$on('event:google-plus-signin-failure', function (event, authResult) {
+                // User has not authorized the G+ App!
+                console.log('Not signed into Google Plus.');
+            });
+        });
+</script>
+</body>
+</html>
